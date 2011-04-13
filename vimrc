@@ -193,8 +193,52 @@ endif
 
 " Color scheme
 set t_Co=256 " Lets you use 256 colors
-set background=light
+let g:solarized_termcolors=16
+if has('gui_running')
+  let g:solarized_style="light"
+  set background=light
+else
+  let g:solarized_style="dark"
+  set background=dark
+end
+
 colorscheme solarized
+
+colorscheme solarized
+let g:solarized_contrast="high"
+ 
+set guifont=Menlo:h16
+
+function! ToggleBackground()
+  if (g:solarized_style=="dark")
+    let g:solarized_style="light"
+    colorscheme solarized
+  else
+    let g:solarized_style="dark"
+    colorscheme solarized
+  endif
+endfunction
+command! Togbg call ToggleBackground()
+nnoremap <F5> :call ToggleBackground()<CR>
+inoremap <F5> <ESC>:call ToggleBackground()<CR>a
+vnoremap <F5> <ESC>:call ToggleBackground()<CR>
+
+function! ToggleContrast()
+  if (g:solarized_contrast=="normal")
+    let g:solarized_contrast="high"
+    colorscheme solarized
+  else
+    let g:solarized_contrast="normal"
+    colorscheme solarized
+  endif
+endfunction
+command! Togctrst call ToggleContrast()
+nnoremap <F4> :call ToggleContrast()<CR>
+inoremap <F4> <ESC>:call ToggleContrast()<CR>a
+vnoremap <F4> <ESC>:call ToggleContrast()<CR>
+
+
+
 " colorscheme railscasts
 " colorscheme vividchalk
 " highlight NonText guibg=#060606
