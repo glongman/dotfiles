@@ -193,7 +193,9 @@ endif
 
 " Color scheme
 set t_Co=256 " Lets you use 256 colors
-colorscheme railscasts
+set background=light
+colorscheme solarized
+" colorscheme railscasts
 " colorscheme vividchalk
 " highlight NonText guibg=#060606
 " highlight Folded  guibg=#0A0A0A guifg=#9090D0
