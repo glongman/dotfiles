@@ -2,6 +2,9 @@
 
 # changing directory to project
 function ws { cd ~/development/workspace/$1*; }
+ 
+# changin directory to Project
+function proj { cd ~/Projects/$1*; }
 
 # misc
 alias reload='. ~/.bash_profile'
