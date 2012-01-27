@@ -6,5 +6,12 @@ function ws { cd ~/development/workspace/$1*; }
 # changin directory to Project
 function proj { cd ~/Projects/$1*; }
 
+alias xul='/Library/Frameworks/XUL.framework/Versions/Current/xulrunner-bin'
 # misc
 alias reload='. ~/.bash_profile'
+
+# review tool
+alias gitrev="hospitalportal-create-review-from-git"
+
+# kdh
+alias "kdh"="sudo openconnect --script ~/Downloads/vpnc-script https://vpn.kdh.on.ca"
