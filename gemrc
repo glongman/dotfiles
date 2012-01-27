@@ -1,10 +1,11 @@
 --- 
+:benchmark: false
 :verbose: true
-gem: --no-ri --no-rdoc
 :update_sources: true
+gem: --no-ri --no-rdoc
+install: --env-shebang
 :sources: 
-- http://gems.rubyforge.org
-- http://gems.github.com
+- http://gems.office.infonium.ca
 :backtrace: false
 :bulk_threshold: 1000
-:benchmark: false
+update: --env-shebang

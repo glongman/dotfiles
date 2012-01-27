@@ -36,6 +36,7 @@ endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
+  call pathogen#runtime_append_all_bundles()
   " Enable file type detection.
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
   " 'cindent' is on in C files, etc.
