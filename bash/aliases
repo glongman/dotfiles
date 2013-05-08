@@ -15,3 +15,6 @@ alias gitrev="hospitalportal-create-review-from-git"
 
 # kdh
 alias "kdh"="sudo openconnect --script ~/Downloads/vpnc-script https://vpn.kdh.on.ca"
+
+# hub
+alias "git"="hub"

@@ -8,6 +8,8 @@ set mouse=a
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
+set clipboard=unnamed
+
 set nobackup
 set nowritebackup
 set history=50		" keep 50 lines of command line history
@@ -193,50 +195,49 @@ if executable("ack")
 endif
 
 " Color scheme
-set t_Co=256 " Lets you use 256 colors
-let g:solarized_termcolors=16
-if has('gui_running')
-  let g:solarized_style="light"
-  set background=light
-else
-  let g:solarized_style="dark"
-  set background=dark
-end
+" set t_Co=256 " Lets you use 256 colors
+ let g:solarized_termcolors=16
+ if has('gui_running')
+   let g:solarized_style="light"
+   set background=light
+ else
+   let g:solarized_style="dark"
+   set background=dark
+ end
+
 
 colorscheme solarized
-
-colorscheme solarized
-let g:solarized_contrast="high"
+" let g:solarized_contrast="high"
  
 set guifont=Menlo:h16
 
-function! ToggleBackground()
-  if (g:solarized_style=="dark")
-    let g:solarized_style="light"
-    colorscheme solarized
-  else
-    let g:solarized_style="dark"
-    colorscheme solarized
-  endif
-endfunction
-command! Togbg call ToggleBackground()
-nnoremap <F5> :call ToggleBackground()<CR>
-inoremap <F5> <ESC>:call ToggleBackground()<CR>a
-vnoremap <F5> <ESC>:call ToggleBackground()<CR>
+" function! ToggleBackground()
+"   if (g:solarized_style=="dark")
+"     let g:solarized_style="light"
+"     colorscheme solarized
+"   else
+"     let g:solarized_style="dark"
+"     colorscheme solarized
+"   endif
+" endfunction
+" command! Togbg call ToggleBackground()
+" nnoremap <F5> :call ToggleBackground()<CR>
+" inoremap <F5> <ESC>:call ToggleBackground()<CR>a
+" vnoremap <F5> <ESC>:call ToggleBackground()<CR>
 
-function! ToggleContrast()
-  if (g:solarized_contrast=="normal")
-    let g:solarized_contrast="high"
-    colorscheme solarized
-  else
-    let g:solarized_contrast="normal"
-    colorscheme solarized
-  endif
-endfunction
-command! Togctrst call ToggleContrast()
-nnoremap <F4> :call ToggleContrast()<CR>
-inoremap <F4> <ESC>:call ToggleContrast()<CR>a
-vnoremap <F4> <ESC>:call ToggleContrast()<CR>
+" function! ToggleContrast()
+"   if (g:solarized_contrast=="normal")
+"     let g:solarized_contrast="high"
+"     colorscheme solarized
+"   else
+"     let g:solarized_contrast="normal"
+"     colorscheme solarized
+"   endif
+" endfunction
+" command! Togctrst call ToggleContrast()
+" nnoremap <F4> :call ToggleContrast()<CR>
+" inoremap <F4> <ESC>:call ToggleContrast()<CR>a
+" vnoremap <F4> <ESC>:call ToggleContrast()<CR>
 
 
 

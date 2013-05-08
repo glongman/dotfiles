@@ -7,7 +7,7 @@ IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
-%w[rubygems looksee/shortcuts wirble].each do |gem|
+%w[rubygems looksee].each do |gem|
   begin
     require gem
   rescue LoadError
@@ -35,7 +35,7 @@ class Object
   end
 end
 
-def copy(str)
+def pbcopy(str)
   IO.popen('pbcopy', 'w') { |f| f << str.to_s }
 end
 
@@ -44,10 +44,10 @@ def copy_history
   index = history.rindex("exit") || -1
   content = history[(index+1)..-2].join("\n")
   puts content
-  copy content
+  pbcopy content
 end
 
-def paste
+def pbpaste
   `pbpaste`
 end
 
