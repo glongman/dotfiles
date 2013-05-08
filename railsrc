@@ -1,14 +1,26 @@
 #!/usr/bin/ruby
 
-begin
-  require 'hirb' # sudo gem install cldwalker-hirb --source http://gems.github.com
-  Hirb.enable
-rescue LoadError
+require "rubygems"
+require "awesome_print"
+
+unless IRB.version.include?('DietRB')
+  IRB::Irb.class_eval do
+    def output_value
+      ap @context.last_value
+    end
+  end
+else # MacRuby
+  IRB.formatter = Class.new(IRB::Formatter) do
+    def inspect_object(object)
+      object.ai
+    end
+  end.new
 end
 
 def change_log(stream)
   ActiveRecord::Base.logger = Logger.new(stream)
   ActiveRecord::Base.clear_active_connections!
+  stream.nil? ? :OFF : :ON 
 end
 
 def show_log
