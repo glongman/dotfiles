@@ -6,15 +6,24 @@ function ws { cd ~/development/workspace/$1*; }
 # changin directory to Project
 function proj { cd ~/Projects/$1*; }
 
+# changin director to Src
+function src { cd ~/Src/$1*; }
+
+alias prettyj='~/tmp/logstash/prettyj'
+
 alias xul='/Library/Frameworks/XUL.framework/Versions/Current/xulrunner-bin'
 # misc
 alias reload='. ~/.bash_profile'
 
+alias estunnel='ssh es -L 9200:localhost:9200 -N'
+
 # review tool
-alias gitrev="hospitalportal-create-review-from-git"
+#alias gitrev="hospitalportal-create-review-from-git"
 
 # kdh
-alias "kdh"="sudo openconnect --script ~/Downloads/vpnc-script https://vpn.kdh.on.ca"
+#alias "kdh"="sudo openconnect --script ~/Downloads/vpnc-script https://vpn.kdh.on.ca"
 
 # hub
 alias "git"="hub"
+
+alias "fit"="date"

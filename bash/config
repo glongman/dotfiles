@@ -1,5 +1,5 @@
 export EDITOR="vim"
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+eval "$(rbenv init -)"
 
 function parse_git_branch {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
