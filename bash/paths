@@ -3,6 +3,7 @@ export PATH="/Applications/Postgres93.app/Contents/MacOS/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH=/opt/local/bin:/usr/local/sbin:/opt/local/sbin:$PATH
 export PATH="~/bin:~/.bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
 MYPATH=/usr/local/share/npm/bin
   if [[ ! ":$PATH:" == *":$MYPATH:"* ]] && [ -d "$MYPATH" ]; then
