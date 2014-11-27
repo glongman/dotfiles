@@ -267,3 +267,6 @@ set smartcase
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 set tags=./tags;
 
+" allow per project .vimrc files
+set exrc            " enable per-directory .vimrc files
+set secure          " disable unsafe commands in local .vimrc files
