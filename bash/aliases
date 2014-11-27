@@ -16,7 +16,16 @@ alias xul='/Library/Frameworks/XUL.framework/Versions/Current/xulrunner-bin'
 alias reload='. ~/.bash_profile'
 
 alias estunnel='ssh es -L 9200:localhost:9200 -N'
+
+
+
 alias sestunnel='ssh ses -L 9200:localhost:9200 -N'
+
+
+
+
+
+
 
 # review tool
 #alias gitrev="hospitalportal-create-review-from-git"
