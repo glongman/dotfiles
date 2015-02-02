@@ -19,7 +19,9 @@ alias estunnel='ssh es -L 9200:localhost:9200 -N'
 
 
 
-alias sestunnel='ssh ses -L 9200:localhost:9200 -N'
+alias sestunnel='ssh ses -L 9200:localhost:9200 -L 9292:localhost:9292 -N'
+alias sextunnel='ssh sex -L 9200:localhost:9200 -L 9292:localhost:9292 -N'
+alias septunnel='ssh sep -L 9200:localhost:9200 -L 9292:localhost:9292 -N'
 
 
 
@@ -37,3 +39,23 @@ alias sestunnel='ssh ses -L 9200:localhost:9200 -N'
 alias "git"="hub"
 
 alias "fit"="date"
+
+alias nginx.start='sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
+alias nginx.stop='sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
+alias nginx.restart='nginx.stop && nginx.start'
+alias php-fpm.start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php55.plist"
+alias php-fpm.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.php55.plist"
+alias php-fpm.restart='php-fpm.stop && php-fpm.start'
+alias php-fpm.vim.conf='vim /usr/local/etc/php/5.5/php-fpm.conf'
+alias nginx.logs.error='tail -250f /usr/local/etc/nginx/logs/error.log'
+alias nginx.logs.access='tail -250f /usr/local/etc/nginx/logs/access.log'
+alias nginx.logs.default.access='tail -250f /usr/local/etc/nginx/logs/default.access.log'
+alias nginx.logs.default-ssl.access='tail -250f /usr/local/etc/nginx/logs/default-ssl.access.log'
+alias nginx.logs.guides.access='tail -250f /usr/local/etc/nginx/logs/guides_access.log'
+alias nginx.logs.guides-ssl.access='tail -250f /usr/local/etc/nginx/logs/guides_ssl_access.log'
+alias guides.start='php-fpm.start && nginx.start'
+alias guides.stop='php-fpm.stop && nginx.stop'
+alias guides.restart='php-fpm.restart && nginx.restart'
+alias guides.access_log='nginx.logs.guides.access'
+alias guides.ssl_access_log='nginx.logs.guidesi-ssl.access'
+
