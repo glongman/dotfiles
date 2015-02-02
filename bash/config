@@ -10,5 +10,9 @@ RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
 WHITE="\[\033[0;37m\]"
-
+ATLAS_TOKEN=m-AYEQ-TivN6C1m8HnEoGnUWrtah3m_ED6h82-6DUFwfZQEHedVqJge8Zu7FkTvEgJk
 PS1="$RED\$(date +%H:%M) \w$YELLOW \$(parse_git_branch)$WHITE\$ "
+
+export DOCKER_CERT_PATH=/Users/glongman/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+export DOCKER_HOST=tcp://192.168.59.103:2376
