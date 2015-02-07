@@ -13,3 +13,5 @@ unset MYPATH
 
 export PATH="$(brew --prefix homebrew/php/php55)/sbin:$PATH"
 export PATH="$(brew --prefix homebrew/php/php55)/sbin:$PATH"
+
+export PATH=$GOPATH/bin:$PATH
