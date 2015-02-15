@@ -4,7 +4,11 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 set mouse=a
-
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
