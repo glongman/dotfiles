@@ -38,7 +38,7 @@ endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
-  call pathogen#runtime_append_all_bundles()
+  call pathogen#infect()
   " Enable file type detection.
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
   " 'cindent' is on in C files, etc.
@@ -100,21 +100,21 @@ set laststatus=2
 let mapleader = ","
 
 " Leader shortcuts for Rails commands
-map <Leader>m :Rmodel 
-map <Leader>c :Rcontroller 
-map <Leader>v :Rview 
-map <Leader>u :Runittest 
-map <Leader>f :Rfunctionaltest 
-map <Leader>tm :RTmodel 
-map <Leader>tc :RTcontroller 
-map <Leader>tv :RTview 
-map <Leader>tu :RTunittest 
-map <Leader>tf :RTfunctionaltest 
-map <Leader>sm :RSmodel 
-map <Leader>sc :RScontroller 
-map <Leader>sv :RSview 
-map <Leader>su :RSunittest 
-map <Leader>sf :RSfunctionaltest 
+" map <Leader>m :Rmodel 
+" map <Leader>c :Rcontroller 
+" map <Leader>v :Rview 
+" map <Leader>u :Runittest 
+" map <Leader>f :Rfunctionaltest 
+" map <Leader>tm :RTmodel 
+" map <Leader>tc :RTcontroller 
+" map <Leader>tv :RTview 
+" map <Leader>tu :RTunittest 
+" map <Leader>tf :RTfunctionaltest 
+" map <Leader>sm :RSmodel 
+" map <Leader>sc :RScontroller 
+" map <Leader>sv :RSview 
+" map <Leader>su :RSunittest 
+" map <Leader>sf :RSfunctionaltest 
 
 map <F6> :NERDTreeToggle<cr>
 map ` :NERDTreeToggle<cr>
