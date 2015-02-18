@@ -1,5 +1,9 @@
 " based on http://github.com/jferris/config_files/blob/master/vimrc
-
+"
+" see https://github.com/dag/vim-fish#teach-a-vim-to-fish
+if &shell =~# 'fish$'
+   set shell=sh
+endif
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
