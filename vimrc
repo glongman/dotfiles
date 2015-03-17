@@ -18,6 +18,7 @@ set backspace=indent,eol,start
 
 set clipboard=unnamed
 
+set nowrap
 set nobackup
 set nowritebackup
 set history=50		" keep 50 lines of command line history
@@ -26,6 +27,7 @@ set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 set visualbell
 set directory=~/tmp
+:set sidescroll=5
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -126,6 +128,8 @@ let mapleader = ","
 
 map <F6> :NERDTreeToggle<cr>
 map ` :NERDTreeToggle<cr>
+
+let NERDTreeIgnore = ['\.sock$','\.zeus\.sock$']
 
 " https://wincent.com/blog/2-hours-with-vim
 function! AckGrep(command)
