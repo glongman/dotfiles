@@ -37,6 +37,20 @@ class Object
   end
 end
 
+def execute(sql)
+  sql = sql.to_sql unless sql.is_a?(String)
+  ActiveRecord::Base.connection.select_all(sql)
+end
+
+def go
+  load '/Users/glongman/console.rb'
+end
+
+def ppj(json_string)
+  hash =  json_string.is_a?(Hash) ? json_string : JSON.parse(json_string)
+  puts JSON.pretty_generate hash
+end
+
 def pbcopy(str)
   IO.popen('pbcopy', 'w') { |f| f << str.to_s }
 end
