@@ -154,8 +154,15 @@ map <leader>v "+p
 map <leader>u :u<CR>
 
 " Command-t settings
+let g:CommandTFileScanner = 'git'
 let g:CommandTMatchWindowAtTop=1
 let g:CommandTCancelMap='<Esc>'
+let g:CommandTWildIgnore = &wildignore
+let g:CommandTWildIgnore .= ',**/.git/*'
+let g:CommandTWildIgnore .= ',**/coverage/*'
+let g:CommandTWildIgnore .= ',**/bower_components/*'
+let g:CommandTWildIgnore .= ',**/node_modules/*'
+let g:CommandTWildIgnore .= ',**/tmp/*'
 "let g:CommandTSelectNextMap='<Down>'
 let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
 map <leader>r :CommandTFlush<CR>
@@ -190,7 +197,7 @@ nmap <F1> <Esc>
 imap <C-F> <C-R>=expand("%")<CR>
 
 " Maps autocomplete to tab
-imap <Tab> <C-N>
+"imap <Tab> <C-N>
 
 imap <C-L> <Space>=><Space>
 
@@ -224,37 +231,37 @@ endif
 
 
 colorscheme solarized
-" let g:solarized_contrast="high"
+let g:solarized_contrast="high"
  
 set guifont=Menlo:h16
 
-" function! ToggleBackground()
-"   if (g:solarized_style=="dark")
-"     let g:solarized_style="light"
-"     colorscheme solarized
-"   else
-"     let g:solarized_style="dark"
-"     colorscheme solarized
-"   endif
-" endfunction
-" command! Togbg call ToggleBackground()
-" nnoremap <F5> :call ToggleBackground()<CR>
-" inoremap <F5> <ESC>:call ToggleBackground()<CR>a
-" vnoremap <F5> <ESC>:call ToggleBackground()<CR>
+ function! ToggleBackground()
+   if (g:solarized_style=="dark")
+     let g:solarized_style="light"
+     colorscheme solarized
+   else
+     let g:solarized_style="dark"
+     colorscheme solarized
+   endif
+ endfunction
+ command! Togbg call ToggleBackground()
+ nnoremap <F5> :call ToggleBackground()<CR>
+ inoremap <F5> <ESC>:call ToggleBackground()<CR>a
+ vnoremap <F5> <ESC>:call ToggleBackground()<CR>
 
-" function! ToggleContrast()
-"   if (g:solarized_contrast=="normal")
-"     let g:solarized_contrast="high"
-"     colorscheme solarized
-"   else
-"     let g:solarized_contrast="normal"
-"     colorscheme solarized
-"   endif
-" endfunction
-" command! Togctrst call ToggleContrast()
-" nnoremap <F4> :call ToggleContrast()<CR>
-" inoremap <F4> <ESC>:call ToggleContrast()<CR>a
-" vnoremap <F4> <ESC>:call ToggleContrast()<CR>
+ function! ToggleContrast()
+   if (g:solarized_contrast=="normal")
+     let g:solarized_contrast="high"
+     colorscheme solarized
+   else
+     let g:solarized_contrast="normal"
+     colorscheme solarized
+   endif
+ endfunction
+ command! Togctrst call ToggleContrast()
+ nnoremap <F4> :call ToggleContrast()<CR>
+ inoremap <F4> <ESC>:call ToggleContrast()<CR>a
+ vnoremap <F4> <ESC>:call ToggleContrast()<CR>
 
 
 
@@ -287,3 +294,15 @@ set tags=./tags;
 " allow per project .vimrc files
 set exrc            " enable per-directory .vimrc files
 set secure          " disable unsafe commands in local .vimrc files
+
+" strip trailing spaces on save
+autocmd BufWritePre *.rb :%s/\s\+$//e
+
+fun! RunRubocop()
+    if &ft =~ 'ruby\|rake\' ||  expand('%:r') == 'Gemfile'
+        silent execute "!bundle exec rubocop-git -a" | redraw!
+    endif
+endfun
+" set autoread
+" autocmd BufWritePost * call RunRubocop()
+

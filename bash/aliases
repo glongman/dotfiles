@@ -1,4 +1,6 @@
 . ~/.zsh/aliases
+#alias lockscreen='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+#alias mute='osascript -e \'set volume output muted true\''
 
 # changing directory to project
 function ws { cd ~/development/workspace/$1*; }
@@ -25,7 +27,8 @@ alias xul='/Library/Frameworks/XUL.framework/Versions/Current/xulrunner-bin'
 # misc
 alias reload='. ~/.bash_profile'
 
-alias estunnel='ssh es -L 9200:localhost:9200 -N'
+#alias estunnel='ssh es -L 9200:localhost:9200 -N'
+alias staging_dbt='ssh us_staging_db -L 9200:localhost:9200 -N'
 #alias sestunnel='ssh ses -L 9200:localhost:9200 -L 9292:localhost:9292 -N'
 #alias sextunnel='ssh sex -L 9200:localhost:9200 -L 9292:localhost:9292 -N'
 #alias septunnel='ssh sep -L 9200:localhost:9200 -L 9292:localhost:9292 -N'
@@ -40,3 +43,21 @@ alias estunnel='ssh es -L 9200:localhost:9200 -N'
 alias "git"="hub"
 
 alias "fit"="date"
+alias gb=$GOPATH/bin/gb
+
+alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
+alias be='bundle exec'
+alias berc='script/rails c'
+alias bers='script/rails s'
+alias bspec='bundle exec rspec'
+alias ber='bundle exec rake'
+
+alias ssh_us_prod='echo " " && echo " " && echo " " && echo "WARNING - PROD" && echo " " && rancher --env 1a257156 exec -it hw-admin-util/cron bash'
+alias ssh_ca_prod='echo " " && echo " " && echo " " && echo "WARNING - PROD" && echo " " && rancher --env 1a573 exec -it hw-admin-util/cron bash'
+alias ssh_ca_snd='rancher --env ca-snd exec -it hw-admin-util/cron bash'
+
+
+alias migrate='bundle exec rake db:migrate; bundle exec rake db:test:clone; RAILS_ENV=test bundle exec rake views:reload'
+
+alias gcop='bundle exec rubocop-git'
+alias acop='bundle exec rubocop-git -a'
