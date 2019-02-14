@@ -1,6 +1,17 @@
+export PATH="/Users/glongman/Projects/micmac/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 export PATH="/Applications/Postgres93.app/Contents/MacOS/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH=/opt/local/bin:/usr/local/sbin:/opt/local/sbin:$PATH
-export PATH="~/bin:~/.bin:/usr/local/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
-export PATH=$GOPATH/bin:$PATH
+export PATH="~/bin:~/.bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
+
+export PATH="/usr/local/opt/gettext/bin:$PATH"
+# export LDFLAGS="-L/usr/local/opt/gettext/lib"
+# export CPPFLAGS="-I/usr/local/opt/gettext/include"
+
+export PATH="/usr/local/opt/icu4c/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+# export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+# export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+# export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig"
+
