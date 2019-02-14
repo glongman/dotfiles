@@ -153,6 +153,8 @@ map <leader>c "+y
 map <leader>v "+p
 map <leader>u :u<CR>
 
+map <leader>c :Autoformat 
+
 " Command-t settings
 let g:CommandTFileScanner = 'git'
 let g:CommandTMatchWindowAtTop=1
@@ -219,8 +221,8 @@ if executable("ack")
 endif
 
 " Color scheme
-" set t_Co=256 " Lets you use 256 colors
- let g:solarized_termcolors=16
+ set t_Co=256 " Lets you use 256 colors
+ let g:solarized_termcolors=256
  if has('gui_running')
    let g:solarized_style="light"
    set background=light
@@ -295,14 +297,17 @@ set tags=./tags;
 set exrc            " enable per-directory .vimrc files
 set secure          " disable unsafe commands in local .vimrc files
 
+
+" au BufWrite * :Autoformat
+
 " strip trailing spaces on save
 autocmd BufWritePre *.rb :%s/\s\+$//e
 
-fun! RunRubocop()
-    if &ft =~ 'ruby\|rake\' ||  expand('%:r') == 'Gemfile'
-        silent execute "!bundle exec rubocop-git -a" | redraw!
-    endif
-endfun
+" fun! RunRubocop()
+"     if &ft =~ 'ruby\|rake\' ||  expand('%:r') == 'Gemfile'
+"         silent execute "!bundle exec rubocop-git -a" | redraw!
+"     endif
+" endfun
 " set autoread
 " autocmd BufWritePost * call RunRubocop()
 
