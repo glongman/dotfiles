@@ -30,7 +30,7 @@ alias migrate='rake db:migrate db:test:clone'
 alias rst='touch tmp/restart.txt'
 
 # other
-alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+# alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias watch="watchr ~/.watchr/rails.watcher"
 alias rsync="rsync --progress"
 alias jekyll="jekyll --pygments --server --auto"
