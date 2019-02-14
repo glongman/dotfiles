@@ -52,12 +52,14 @@ alias bers='script/rails s'
 alias bspec='bundle exec rspec'
 alias ber='bundle exec rake'
 
-alias ssh_us_prod='echo " " && echo " " && echo " " && echo "WARNING - PROD" && echo " " && rancher --env 1a257156 exec -it hw-admin-util/cron bash'
-alias ssh_ca_prod='echo " " && echo " " && echo " " && echo "WARNING - PROD" && echo " " && rancher --env 1a573 exec -it hw-admin-util/cron bash'
-alias ssh_ca_snd='rancher --env ca-snd exec -it hw-admin-util/cron bash'
+alias ssh_us_prod='echo " " && echo " " && echo " " && echo "WARNING - PROD" && echo " " && rx staging exec -p production -b us-prd bash'
+alias ssh_ca_prod='echo " " && echo " " && echo " " && echo "WARNING - PROD" && echo " " && rx staging exec -p production -b ca-prd bash'
 
 
 alias migrate='bundle exec rake db:migrate; bundle exec rake db:test:clone; RAILS_ENV=test bundle exec rake views:reload'
 
 alias gcop='bundle exec rubocop-git'
 alias acop='bundle exec rubocop-git -a'
+
+export NVM_DIR="$HOME/.nvm"
+  . "/usr/local/homebrew/opt/nvm/nvm.sh"
