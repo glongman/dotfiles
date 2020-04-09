@@ -56,10 +56,12 @@ alias ssh_us_prod='echo " " && echo " " && echo " " && echo "WARNING - PROD" && 
 alias ssh_ca_prod='echo " " && echo " " && echo " " && echo "WARNING - PROD" && echo " " && rx staging exec -p production -b ca-prd bash'
 
 
-alias migrate='bundle exec rake db:migrate; bundle exec rake db:test:clone; RAILS_ENV=test bundle exec rake views:reload'
+alias migrate='bundle exec rake db:migrate; bundle exec rake db:test:prepare; RAILS_ENV=test bundle exec rake views:reload'
 
 alias gcop='bundle exec rubocop-git'
 alias acop='bundle exec rubocop-git -a'
+
+alias worky='ssh 10.200.8.149'
 
 export NVM_DIR="$HOME/.nvm"
   . "/usr/local/homebrew/opt/nvm/nvm.sh"
