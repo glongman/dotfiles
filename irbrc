@@ -42,9 +42,11 @@ def execute(sql)
   ActiveRecord::Base.connection.select_all(sql)
 end
 
-def go
-  load '/Users/glongman/console.rb'
+def go(file='console')
+  load "/Users/glongman/#{file}.rb"
 end
+
+
 
 def ppj(json_string)
   hash =  json_string.is_a?(Hash) ? json_string : JSON.parse(json_string)

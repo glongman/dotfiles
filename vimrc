@@ -310,4 +310,8 @@ autocmd BufWritePre *.rb :%s/\s\+$//e
 " endfun
 " set autoread
 " autocmd BufWritePost * call RunRubocop()
+"
+" Code Folding with space bar
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
 
