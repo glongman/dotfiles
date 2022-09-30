@@ -1,0 +1,28 @@
+export EDITOR="vim"
+eval "$(rbenv init -)"
+
+function parse_git_branch {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "("${ref#refs/heads/}")"
+}
+
+RED="\[\033[0;31m\]"
+YELLOW="\[\033[0;33m\]"
+GREEN="\[\033[0;32m\]"
+WHITE="\[\033[0;37m\]"
+PS1="$RED\$(date +%H:%M) \w$YELLOW \$(parse_git_branch)$WHITE\$ "
+
+
+export GOPATH=$HOME/Projects/GO
+export ZEUSSOCK=$HOME/tmp/.zeus.sock
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES 
+
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+export HOMEBREW_NO_INSTALL_UPGRADE=1
+
+
+export RUBY_DEBUG_ENABLE=1
+
+export COVERBAND_DISABLE_AUTO_START=yes
