@@ -3,6 +3,8 @@
 require "rubygems"
 require "awesome_print"
 
+IRB.conf[:USE_COLORIZE] = false
+
 unless IRB.version.include?('DietRB')
   IRB::Irb.class_eval do
     def output_value

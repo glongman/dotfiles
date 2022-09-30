@@ -1,5 +1,5 @@
 " based on http://github.com/jferris/config_files/blob/master/vimrc
-"
+let g:python3_host_prog="/usr/local/bin"
 " see https://github.com/dag/vim-fish#teach-a-vim-to-fish
 if &shell =~# 'fish$'
    set shell=sh
@@ -16,7 +16,7 @@ end
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-set clipboard=unnamed
+" set clipboard=unnamed
 
 set nowrap
 set nobackup
@@ -31,6 +31,9 @@ set directory=~/tmp
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
+
+" Comment out lines
+vnoremap <C-n> :norm
 
 " This is an alternative that also works in block mode, but the deleted
 " text is lost and it only works for putting the current register.
@@ -155,6 +158,10 @@ map <leader>u :u<CR>
 
 map <leader>c :Autoformat 
 
+autocmd FileType vim,rb,rake let g:autoformat_autoindent = 0
+autocmd FileType vim,rb,rake let g:autoformat_retab = 0
+autocmd FileType vim,rb,rake let g:autoformat_remove_trailing_spaces = 0
+
 " Command-t settings
 let g:CommandTFileScanner = 'git'
 let g:CommandTMatchWindowAtTop=1
@@ -204,7 +211,7 @@ imap <C-F> <C-R>=expand("%")<CR>
 imap <C-L> <Space>=><Space>
 
 " Display extra whitespace
-" set list listchars=tab:»·,trail:·
+set list listchars=tab:»·,trail:·
 
 " Edit routes
 command! Rroutes :e config/routes.rb

@@ -2,12 +2,16 @@
 require 'irb/completion'
 require 'irb/ext/save-history'
 require 'awesome_print'
+require 'irb'
+
 
 AwesomePrint.irb!
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 
 IRB.conf[:PROMPT_MODE] = :SIMPLE
+IRB.conf[:USE_COLORIZE] = false
+IRB.conf[:USE_AUTOCOMPLETE] = false
 
 %w[rubygems looksee].each do |gem|
   begin
