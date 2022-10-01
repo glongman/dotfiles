@@ -16,7 +16,7 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 if !exists('g:vimrubocop_rubocop_cmd')
-  let g:vimrubocop_rubocop_cmd = 'rubocop '
+  let g:vimrubocop_rubocop_cmd = 'bundle exec rubocop '
 endif
 
 " Options

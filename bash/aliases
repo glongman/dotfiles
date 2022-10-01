@@ -63,7 +63,7 @@ alias acop='bundle exec rubocop-git -A'
 
 alias worky='ssh 10.200.8.149'
 
-alias rubo='git diff --name-only HEAD | xargs rubocop -A'
+alias rubo='git diff --name-only HEAD | xargs bundle exec rubocop -A'
 
 alias mysqlgo='brew services restart mysql@5.7'
 
