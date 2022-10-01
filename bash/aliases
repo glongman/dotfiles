@@ -66,3 +66,12 @@ alias worky='ssh 10.200.8.149'
 alias rubo='git diff --name-only HEAD | xargs rubocop -A'
 
 alias mysqlgo='brew services restart mysql@5.7'
+
+alias   skupus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n sandbox --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_us_snd.yaml'
+alias skdownus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-us-snd-geoff -n sandbox --context=fs-east-1-prd-2'
+alias skbashus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl exec -it -n sandbox --context=fs-east-1-prd-2 hw-admin-us-snd-geoff bash'
+
+alias   skupca='echo "CA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n sandbox --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_ca_snd.yaml'
+alias skdownca='echo "CA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-ca-snd-geoff -n sandbox --context=fs-east-1-prd-2'
+alias skbashca='echo "CA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl exec -it -n sandbox --context=fs-east-1-prd-2 hw-admin-ca-snd-geoff bash'
+
