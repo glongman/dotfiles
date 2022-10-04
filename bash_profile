@@ -12,3 +12,4 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(rbenv init - bash)"
+source ~/.rx/shell_config

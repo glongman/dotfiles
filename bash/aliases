@@ -67,6 +67,15 @@ alias rubo='git diff --name-only HEAD | xargs bundle exec rubocop -A'
 
 alias mysqlgo='brew services restart mysql@5.7'
 
+alias   kupus='echo "USA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n default --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_us_prd.yaml'
+alias kdownus='echo "USA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-us-prd-geoff -n default --context=fs-east-1-prd-2'
+alias kbashus='echo "USA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl exec -it -n default --context=fs-east-1-prd-2 hw-admin-us-prd-geoff bash'
+
+alias   kupca='echo "CA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n default --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_ca_prd.yaml'
+alias kdownca='echo "CA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-ca-prd-geoff -n default --context=fs-east-1-prd-2'
+alias kbashca='echo "CA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl exec -it -n default --context=fs-east-1-prd-2 hw-admin-ca-prd-geoff bash'
+
+
 alias   skupus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n sandbox --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_us_snd.yaml'
 alias skdownus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-us-snd-geoff -n sandbox --context=fs-east-1-prd-2'
 alias skbashus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl exec -it -n sandbox --context=fs-east-1-prd-2 hw-admin-us-snd-geoff bash'
