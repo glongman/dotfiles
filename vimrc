@@ -27,7 +27,7 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
-lset visualbell
+set visualbell
 set directory=~/tmp
 :set sidescroll=5
 
@@ -120,8 +120,11 @@ let NERDTreeIgnore = ['\.sock$','\.zeus\.sock$']
 if has('nvim')
   call plug#begin('~/.vim/plugged')
   Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-compe'
   Plug 'sbdchd/neoformat'
-  let g:neoformat_enabled_ruby = ['rupbocop']
+  let g:neoformat_enabled_ruby = ['rubocop']
+ "  let g:neoformat_verbose = 1
+  map <leader>c :Neoformat 
 
   call plug#end()
 
