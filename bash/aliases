@@ -1,69 +1,22 @@
 . ~/.zsh/aliases
-#alias lockscreen='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
-#alias mute='osascript -e \'set volume output muted true\''
-
-# changing directory to project
-function ws { cd ~/development/workspace/$1*; }
- 
-# changin directory to Project
 function proj { cd ~/Projects/$1*; }
-function github { cd "$GOPATH"/src/github.com/$1*; }
-function glong { cd "$GOPATH"/src/github.com/glongman/$1*; }
-function ghw { cd "$GOPATH"/src/github.com/healthwave/$1*; }
-function halias {
-  echo -e 'ws name - ~/development/workspace'
-  echo -e 'proj name - ~/Projects'
-  echo -e 'github name - $GOPATH/src/github.com'
-  echo -e 'glong name - $GOPATH/src/github.com/glongman'
-  echo -w 'ghw name - $GOPATH/src/github.com/healthwave'
-}
-
-# changin director to Src
-function src { cd ~/Src/$1*; }
-
-alias prettyj='~/tmp/logstash/prettyj'
-
-alias xul='/Library/Frameworks/XUL.framework/Versions/Current/xulrunner-bin'
-# misc
 alias reload='. ~/.bash_profile'
-
-#alias estunnel='ssh es -L 9200:localhost:9200 -N'
-alias staging_dbt='ssh us_staging_db -L 9200:localhost:9200 -N'
-#alias sestunnel='ssh ses -L 9200:localhost:9200 -L 9292:localhost:9292 -N'
-#alias sextunnel='ssh sex -L 9200:localhost:9200 -L 9292:localhost:9292 -N'
-#alias septunnel='ssh sep -L 9200:localhost:9200 -L 9292:localhost:9292 -N'
-
-# review tool
-#alias gitrev="hospitalportal-create-review-from-git"
-
-# kdh
-#alias "kdh"="sudo openconnect --script ~/Downloads/vpnc-script https://vpn.kdh.on.ca"
-
-# hub
-alias "git"="hub"
-
-alias "fit"="date"
-alias gb=$GOPATH/bin/gb
 
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 alias be='bundle exec'
 alias berc='script/rails c'
 alias bers='script/rails s'
 alias bspec='bundle exec rspec'
+alias bspecl='BUNDLE_GEMFILE=Gemfile.local.rb bundle exec rspec'
 alias ber='bundle exec rake'
-
-alias ssh_us_prod='echo " " && echo " " && echo " " && echo "WARNING - PROD" && echo " " && rx staging exec -p production -b us-prd bash'
-alias ssh_ca_prod='echo " " && echo " " && echo " " && echo "WARNING - PROD" && echo " " && rx staging exec -p production -b ca-prd bash'
-
 
 alias migrate='bundle exec rake db:migrate; bundle exec rake db:test:prepare; RAILS_ENV=test bundle exec rake views:reload'
 
 alias gcop='bundle exec rubocop-git'
 alias acop='bundle exec rubocop-git -A'
+alias rubo='git status --porcelain | awk ''!/^D/'' | cut -c4- | xargs bundle exec rubocop -A'
 
 alias worky='ssh 10.200.8.149'
-
-alias rubo='git diff --name-only HEAD | xargs bundle exec rubocop -A'
 
 alias mysqlgo='brew services restart mysql@5.7'
 
@@ -83,4 +36,8 @@ alias skbashus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl e
 alias   skupca='echo "CA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n sandbox --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_ca_snd.yaml'
 alias skdownca='echo "CA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-ca-snd-geoff -n sandbox --context=fs-east-1-prd-2'
 alias skbashca='echo "CA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl exec -it -n sandbox --context=fs-east-1-prd-2 hw-admin-ca-snd-geoff bash'
+
+alias rc="BUNDLE_GEMFILE=Gemfile.local.rb ./bin/rails c"
+alias rs="BUNDLE_GEMFILE=Gemfile.local.rb ./bin/rails s"
+alias bi="BUNDLE_GEMFILE=Gemfile.local.rb bundle install"
 

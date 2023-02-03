@@ -8,11 +8,13 @@ endif
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 set mouse=a
-if has("mouse_sgr")
-    set ttymouse=sgr
-else
-    set ttymouse=xterm2
-end
+if !has('nvim')
+  if has("mouse_sgr")
+      set ttymouse=sgr
+  else
+      set ttymouse=xterm2
+  end
+endif
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -25,7 +27,7 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
-set visualbell
+lset visualbell
 set directory=~/tmp
 :set sidescroll=5
 
@@ -98,13 +100,6 @@ else
 
 endif " has("autocmd")
 
-" if has("folding")
-  " set foldenable
-  " set foldmethod=syntax
-  " set foldlevel=1
-  " set foldnestmax=2
-  " set foldtext=strpart(getline(v:foldstart),0,50).'\ ...\ '.substitute(getline(v:foldend),'^[\ #]*','','g').'\ '
-" endif
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -117,50 +112,38 @@ set laststatus=2
 " \ is the leader character
 let mapleader = ","
 
-" Leader shortcuts for Rails commands
-" map <Leader>m :Rmodel 
-" map <Leader>c :Rcontroller 
-" map <Leader>v :Rview 
-" map <Leader>u :Runittest 
-" map <Leader>f :Rfunctionaltest 
-" map <Leader>tm :RTmodel 
-" map <Leader>tc :RTcontroller 
-" map <Leader>tv :RTview 
-" map <Leader>tu :RTunittest 
-" map <Leader>tf :RTfunctionaltest 
-" map <Leader>sm :RSmodel 
-" map <Leader>sc :RScontroller 
-" map <Leader>sv :RSview 
-" map <Leader>su :RSunittest 
-" map <Leader>sf :RSfunctionaltest 
-
 map <F6> :NERDTreeToggle<cr>
 map ` :NERDTreeToggle<cr>
 
 let NERDTreeIgnore = ['\.sock$','\.zeus\.sock$']
 
-" https://wincent.com/blog/2-hours-with-vim
-function! AckGrep(command)
-  cexpr system("ack " . a:command)
-  cw " show quickfix window already
-endfunction
+if has('nvim')
+  call plug#begin('~/.vim/plugged')
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'sbdchd/neoformat'
+  let g:neoformat_enabled_ruby = ['rupbocop']
 
-command! -nargs=+ -complete=file Ack call AckGrep(<q-args>)
-map <leader>f :Ack<space>
-" previous ack result
-map <leader>[ :cp<CR>
-" next ack result
-map <leader>] :cn<CR>
+  call plug#end()
 
-map <leader>c "+y
-map <leader>v "+p
-map <leader>u :u<CR>
+  set clipboard+=unnamedplus
+endif
 
-map <leader>c :Autoformat 
+if !has('nvim')
+  " https://wincent.com/blog/2-hours-with-vim
+  function! AckGrep(command)
+    cexpr system("ack " . a:command)
+    cw " show quickfix window already
+  endfunction
 
-autocmd FileType vim,rb,rake let g:autoformat_autoindent = 0
-autocmd FileType vim,rb,rake let g:autoformat_retab = 0
-autocmd FileType vim,rb,rake let g:autoformat_remove_trailing_spaces = 0
+  command! -nargs=+ -complete=file Ack call AckGrep(<q-args>)
+  map <leader>f :Ack<space>
+
+  map <leader>c :Autoformat 
+
+  autocmd FileType vim,rb,rake let g:autoformat_autoindent = 0
+  autocmd FileType vim,rb,rake let g:autoformat_retab = 0
+  autocmd FileType vim,rb,rake let g:autoformat_remove_trailing_spaces = 0
+endif
 
 " Command-t settings
 let g:CommandTFileScanner = 'git'
@@ -213,10 +196,6 @@ imap <C-L> <Space>=><Space>
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
 
-" Edit routes
-command! Rroutes :e config/routes.rb
-command! Rschema :e db/schema.rb
-
 " Local config
 if filereadable(".vimrc.local")
   source .vimrc.local
@@ -242,7 +221,7 @@ endif
 colorscheme solarized
 let g:solarized_contrast="high"
  
-set guifont=Menlo:h16
+ set guifont=Input:h16
 
  function! ToggleBackground()
    if (g:solarized_style=="dark")
@@ -283,9 +262,6 @@ set guifont=Menlo:h16
 set number
 set numberwidth=5
 
-" Snippets are activated by Shift+Tab
-let g:snippetsEmu_key = "<S-Tab>"
-
 " Tab completion options
 " (only complete to the longest unambiguous match, and show a menu)
 set completeopt=longest,menu
@@ -296,9 +272,11 @@ set complete=.,t
 set ignorecase
 set smartcase
 
+if !has('nvim')
 " Tags
-let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
-set tags=./tags;
+  let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
+  set tags=./tags;
+endif
 
 " allow per project .vimrc files
 set exrc            " enable per-directory .vimrc files
@@ -310,15 +288,6 @@ set secure          " disable unsafe commands in local .vimrc files
 " strip trailing spaces on save
 autocmd BufWritePre *.rb :%s/\s\+$//e
 
-" fun! RunRubocop()
-"     if &ft =~ 'ruby\|rake\' ||  expand('%:r') == 'Gemfile'
-"         silent execute "!bundle exec rubocop-git -a" | redraw!
-"     endif
-" endfun
-" set autoread
-" autocmd BufWritePost * call RunRubocop()
-"
-" Code Folding with space bar
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 

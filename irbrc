@@ -53,7 +53,7 @@ end
 
 
 def ppj(json_string)
-  hash =  json_string.is_a?(Hash) ? json_string : JSON.parse(json_string)
+  hash =  (json_string.is_a?(Hash) || json_string.is_a?(Array)) ? json_string : JSON.parse(json_string)
   puts JSON.pretty_generate hash
 end
 
@@ -71,6 +71,20 @@ end
 
 def pbpaste
   `pbpaste`
+end
+
+def change_log(stream)
+  ActiveRecord::Base.logger = Logger.new(stream)
+  ActiveRecord::Base.clear_active_connections!
+  stream.nil? ? :OFF : :ON·
+end
+
+def show_log
+  change_log(STDOUT)
+end
+
+def hide_log
+  change_log(nil)
 end
 
 load File.dirname(__FILE__) + '/.railsrc' if ($0 == 'irb' && ENV['RAILS_ENV']) || ($0 == 'script/rails' && Rails.env)

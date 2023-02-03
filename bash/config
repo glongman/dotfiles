@@ -12,6 +12,7 @@ GREEN="\[\033[0;32m\]"
 WHITE="\[\033[0;37m\]"
 PS1="$RED\$(date +%H:%M) \w$YELLOW \$(parse_git_branch)$WHITE\$ "
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export GOPATH=$HOME/Projects/GO
 export ZEUSSOCK=$HOME/tmp/.zeus.sock
