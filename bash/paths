@@ -1,4 +1,6 @@
 export PATH="/Users/glongman/bin:$PATH"
+export PATH="/Users/glongman/scripts:$PATH"
+export PATH="/Users/glongman/.local/bin:$PATH"
 export PATH="/Users/glongman/bin/tabulator-1.2.1/bin:$PATH"
 export PATH="/Users/glongman/Projects/micmac/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
@@ -17,6 +19,7 @@ export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 # export CPPFLAGS="-I/usr/local/opt/icu4c/include"
 # export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig"
 
+export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/mysql@5.7/bin:$PATH"
 export PATH="/opt/homebrew/opt/redis@6.2/bin:$PATH"
 

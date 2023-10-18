@@ -1,0 +1,15 @@
+--ignore-dir=sorbet
+--ignore-dir=node_modules
+--ignore-dir=offline
+--ignore-dir=log
+--ignore-dir=cypress
+--ignore-dir=e2e
+--ignore-dir=public
+--ignore-dir=uploads
+--ignore-dir=.git
+--ignore-dir=tmp
+--ignore-dir=vendor
+--ignore-dir=storage
+--ignore-dir=docuosaurus
+
+
