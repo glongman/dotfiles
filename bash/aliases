@@ -1,4 +1,5 @@
 function proj { cd ~/Projects/$1*; }
+alias rxdev="cd ~/dev/hw-admin"
 alias reload='. ~/.bash_profile'
 
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
@@ -14,7 +15,7 @@ alias migrate='bundle exec rake db:migrate; bundle exec rake db:test:prepare; RA
 
 alias gcop='bundle exec rubocop-git'
 alias acop='bundle exec rubocop-git -A'
-alias rubo='git status --porcelain | awk ''!/^D/'' | cut -c4- | xargs bundle exec rubocop -D -A'
+alias rubo='git status --porcelain | grep -v ">" |  awk ''!/^D/'' | cut -c4- | xargs bundle exec rubocop -D -A'
 
 alias worky='ssh 10.200.8.149'
 
@@ -23,15 +24,16 @@ alias mysqlgo='brew services restart mysql@8.0'
 alias   kupus='echo "USA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n default --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_us_prd.yaml'
 alias kdownus='echo "USA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-us-prd-geoff -n default --context=fs-east-1-prd-2'
 alias kbashus='echo "USA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl exec -it -n default --context=fs-east-1-prd-2 hw-admin-us-prd-geoff bash'
+# alias kbashus='echo "USA PROD" && rx st shell -b us-prd -x'
 
 alias   kupca='echo "CA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n default --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_ca_prd.yaml'
 alias kdownca='echo "CA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-ca-prd-geoff -n default --context=fs-east-1-prd-2'
 alias kbashca='echo "CA PROD" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl exec -it -n default --context=fs-east-1-prd-2 hw-admin-ca-prd-geoff bash'
 
 
-alias   skupus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n sandbox --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_us_snd.yaml'
-alias skdownus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-us-snd-geoff -n sandbox --context=fs-east-1-prd-2'
-alias skbashus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl exec -it -n sandbox --context=fs-east-1-prd-2 hw-admin-us-snd-geoff bash'
+#alias   skupus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n sandbox --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_us_snd.yaml'
+#alias skdownus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-us-snd-geoff -n sandbox --context=fs-east-1-prd-2'
+#alias skbashus='echo "USA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl exec -it -n sandbox --context=fs-east-1-prd-2 hw-admin-us-snd-geoff bash'
 
 alias   skupca='echo "CA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl apply -n sandbox --context=fs-east-1-prd-2 -f ~/.rx/repos/helm-charts/kubernetes-yaml/glongman_hw_admin_ca_snd.yaml'
 alias skdownca='echo "CA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl delete po hw-admin-ca-snd-geoff -n sandbox --context=fs-east-1-prd-2'
@@ -40,4 +42,24 @@ alias skbashca='echo "CA SANDBOX" && KUBECONFIG=~/.rx/fs-east-1-prd-2 kubectl ex
 alias rc="BUNDLE_GEMFILE=Gemfile.local.rb ./bin/rails c"
 alias rs="BUNDLE_GEMFILE=Gemfile.local.rb ./bin/rails s"
 alias bi="BUNDLE_GEMFILE=Gemfile.local.rb bundle install"
+
+alias prp3="lsof -nP -iTCP:3000 | grep ruby"
+
+alias scrubls="aws s3 ls s3://dev.fullscript.io/daily-scrubs/"
+
+alias scrubus="aws s3api get-object --bucket dev.fullscript.io --key daily-scrubs"
+
+alias rup="rx dev up -c local"
+alias rstat="rx dev status -c local"
+
+alias rlistus='kubectx fs-east-1-prd-2 && kubens default && kubectl get pods -l app=hw-admin,component=web,release=hw-admin-us-prd'
+
+function proj { cd ~/Projects/$1*; }
+
+function rbashus {
+  pod=$1
+  echo $pod
+  kubectl exec -it $pod -- /bin/bash ;
+}
+
 

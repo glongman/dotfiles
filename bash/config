@@ -30,3 +30,6 @@ export COVERBAND_DISABLE_AUTO_START=yes
 export PATH="/opt/homebrew/opt/mysql@5.7/bin:$PATH"
 
 export DISABLE_BOOTSNAP=true
+
+export DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+

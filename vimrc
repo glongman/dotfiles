@@ -1,3 +1,4 @@
+set visualbell
 " based on http://github.com/jferris/config_files/blob/master/vimrc
 let g:python3_host_prog="/usr/local/bin"
 " see https://github.com/dag/vim-fish#teach-a-vim-to-fish
@@ -27,9 +28,9 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
-set visualbell
+" set visualbell
 set directory=~/tmp
-:set sidescroll=5
+set sidescroll=5
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -87,12 +88,13 @@ if has("autocmd")
   " Automatically load .vimrc source when saved
   autocmd BufWritePost .vimrc source $MYVIMRC
 
+  autocmd BufReadPre *
+    \ let f=getfsize(expand("<afile>"))
+    \ | if f > 100000 || f == -2
+    \ | let b:copilot_enabled = v:false
+    \ | endif
+
   augroup END
-
-  let g:ctrlp_map = '<c-p>'
-  let g:ctrlp_cmd = 'CtrlP'
-
-  let g:ctrlp_working_path_mode = 'ra'
 
 else
 
@@ -131,7 +133,6 @@ if has('nvim')
   set clipboard+=unnamedplus
 endif
 
-if !has('nvim')
   " https://wincent.com/blog/2-hours-with-vim
   function! AckGrep(command)
     cexpr system("ack " . a:command)
@@ -140,6 +141,7 @@ if !has('nvim')
 
   command! -nargs=+ -complete=file Ack call AckGrep(<q-args>)
   map <leader>f :Ack<space>
+if !has('nvim')
 
   map <leader>c :Autoformat 
 
@@ -159,8 +161,8 @@ let g:CommandTWildIgnore .= ',**/bower_components/*'
 let g:CommandTWildIgnore .= ',**/node_modules/*'
 let g:CommandTWildIgnore .= ',**/tmp/*'
 "let g:CommandTSelectNextMap='<Down>'
-let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
-map <leader>r :CommandTFlush<CR>
+"let g:CommandTSelectPrevMap=['<C-p>', '<C-k>', '<Esc>OA', '<Up>']
+" map <leader>r :CommandTFlush<CR>
 
 " Hide search highlighting
 map <Leader>h :set invhls <CR>
@@ -172,10 +174,6 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " Opens a tab edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>t
 map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-
-" Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 " Duplicate a selection
 " Visual mode: D
@@ -290,7 +288,89 @@ set secure          " disable unsafe commands in local .vimrc files
 
 " strip trailing spaces on save
 autocmd BufWritePre *.rb :%s/\s\+$//e
+autocmd BufWritePre
+" set ttimeout ttimeoutlen=10 
+" silent! execute "set <M-Right>=\<Esc>[1;9C"
+" imap <C-Right> <Plug>(copilot-accept-word)
+" Copilot
+imap <M-CR> <M-Right>
 
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
+
+
+" set path+=apps/**/services
+" set path+=apps/**/models
+" set path+=apps/**/presenters
+" set path+=apps/**/spec
+" set path+=apps/**/controllers
+" set path+=apps/**/views
+" set path+=apps/**/graphql
+" set path+=apps/**/policies
+" set path+=apps/**/jobs
+" set path+=apps/**/mailers
+" set path+=lib/tasks
+
+" --- FZF / CMD-P CONFIGURATION ---
+
+
+" Use ripgrep to find files, including hidden ones, but ignoring the .git folder
+" The --follow flag ensures it follows symlinks (common in monorepos)
+set rtp+=/opt/homebrew/opt/fzf
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*" --glob "!*.js"' 
+  " This links the :Files command to use the Ripgrep settings above
+  command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+endif
+
+" Force Ctrl-p to trigger the :Files command in Normal Mode
+" We use 'unmap' first to clear any legacy baggage if it exists
+silent! nunmap <C-p>
+nnoremap <C-p> :Files<CR>
+" The 'CMD-P' equivalent (Standard file search)
+" The 'Git-only' search (Even faster for Rails projects)
+nnoremap <leader>p :GFiles<CR>
+
+" Aesthetics: Floating window with a preview on the right
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
+
+" Enable the preview window (requires 'bat' for syntax highlighting)
+" brew install bat
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" 1. Kill any existing mappings for Ctrl-P in all modes
+silent! nunmap <C-p>
+silent! iunmap <C-p>
+silent! cunmap <C-p>
+silent! vunmap <C-p>
+
+" 2. Re-bind it purely to the command you like
+nnoremap <C-p> :Files<CR>
+" --- Specialized FZF Shortcuts ---
+
+" CMD-B (Buffers): Search through open files (VSCode-style buffer switching)
+nnoremap <C-b> :Buffers<CR>
+
+" Leader-h (History): Search through Most Recently Used (MRU) files
+nnoremap <leader>h :History<CR>
+
+" Leader-l (Lines): Search for text within all open buffers
+nnoremap <leader>l :Lines<CR>
+
+" Leader-g (Git Commits): Search through commit history
+nnoremap <leader>g :Commits<CR>
+" 3. Ensure the layout is global
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
+
+
+" Navigate splits using Option + Arrow Keys
+nnoremap <M-Left>  <C-w>h
+nnoremap <M-Down>  <C-w>j
+nnoremap <M-Up>    <C-w>k
+nnoremap <M-Right> <C-w>l
+
+" Press ,= to make all splits equal size
+nnoremap <leader>= <C-w>=
 
