@@ -7,3 +7,10 @@ config/stripe
 config/xbuild
 config/htop
 vim/.VimballRecord
+config/github-copilot
+config/jgit
+config/shadowenv
+config/strongdmid
+config/zed
+dump.rdb
+vimLog.txt

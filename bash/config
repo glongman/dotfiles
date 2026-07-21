@@ -32,4 +32,40 @@ export PATH="/opt/homebrew/opt/mysql@5.7/bin:$PATH"
 export DISABLE_BOOTSNAP=true
 
 export DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+shadowme() {
+  local SOURCE_DIR="$HOME/dev/hw-admin"
+  local ALLOWED_ROOT="$HOME/Projects"
 
+  # 1. SCOPE CHECK: Silent exit if NOT under ~/Projects
+  if [[ "$PWD" != "$ALLOWED_ROOT" && "$PWD" != "$ALLOWED_ROOT"/* ]]; then
+    return 0
+  fi
+
+  # 2. SOURCE CHECK: Silent exit if inside main checkout
+  if [[ "$PWD" -ef "$SOURCE_DIR" ]]; then
+    return 0
+  fi
+
+  # 3. SAFETY CHECK: Is there a REAL directory here?
+  # If .shadowenv.d exists and is NOT a symlink, we assume it contains
+  # custom work. We stop immediately to avoid deleting it.
+  if [[ -d ".shadowenv.d" && ! -L ".shadowenv.d" ]]; then
+    echo "⚠️  Skipping shadowme: Found a real .shadowenv.d directory."
+    return 0
+  fi
+
+  # 4. IDEMPOTENCY: Is it already linked correctly?
+  if [[ -L ".shadowenv.d" ]] && [[ "$(readlink .shadowenv.d)" == "$SOURCE_DIR/.shadowenv.d" ]]; then
+    # Optional: ensure it's trusted, but keep it silent
+    shadowenv trust > /dev/null 2>&1
+    return 0
+  fi
+
+  # 5. EXECUTION: Clean (safe now), Link, Trust
+  rm -rf .shadowenv.d
+  ln -s "$SOURCE_DIR/.shadowenv.d" .shadowenv.d
+  shadowenv trust
+}
+shadowme
+# rx_workflows configuration
+source "$HOME/.config/rx_workflows/init.sh"

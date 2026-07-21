@@ -364,13 +364,3 @@ nnoremap <leader>g :Commits<CR>
 " 3. Ensure the layout is global
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
 
-
-" Navigate splits using Option + Arrow Keys
-nnoremap <M-Left>  <C-w>h
-nnoremap <M-Down>  <C-w>j
-nnoremap <M-Up>    <C-w>k
-nnoremap <M-Right> <C-w>l
-
-" Press ,= to make all splits equal size
-nnoremap <leader>= <C-w>=
-
